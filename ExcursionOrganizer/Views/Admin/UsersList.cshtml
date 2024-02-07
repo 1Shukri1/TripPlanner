@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ExcursionOrganizer.Models.UserViewModel>
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="breadcrumb"><a href="#">Начало</a> / Администраторски панел</span>
+                <h3>Потребители и роли</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="panel panel-primary" style="margin-left:30px;margin-right:30px;">
+    
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+            <thead>
+                <tr >
+                    <td><b class="d-flex justify-content-center">Потребителско име</b></td>
+                    <td><b class="d-flex justify-content-center">Email</b></td>
+                    <td><b class="d-flex justify-content-center">Роля</b></td>
+                    <td><b class="d-flex justify-content-center">Опция - изтриване на акунт</b></td>
+
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (user.Email == User.Identity.Name)
+                        {
+                            <p>Администратор <i style="color:red;">(Аз)</i></p>
+                        }
+                        else
+                        {
+                            <p>Обикновен потребител</p>
+                        }
+                    </td>
+
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            @if (user.Email == User.Identity.Name)
+                            {
+                               @* <form method="post" asp-controller="Admin" asp-action="DeleteUserAccount">
+                                    <fieldset>
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button disabled type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i> </button>
+                                    </fieldset>
+                                </form>*@
+
+                               
+                                    <form method="post" asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@user.Id">
+                                    <button disabled type="submit" class="btn btn-danger"><i class="fas fa-user-times"></i></button>
+                                    </form>
+
+                            }
+                            else
+                            {
+
+
+                                if (user.IsDeleted == false) //ако потребителят не е изтрит
+                                {
+                                    @*<form method="post" asp-controller="Admin" asp-action="DeleteUserAccount">
+                                        <fieldset>
+                                            <input type="hidden" name="id" value="@user.Id" />
+                                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban"></i> </button>
+                                        </fieldset>
+                                    </form>*@
+
+                                    <form method="post" asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@user.Id">
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-user-times"></i></button>
+                                    </form>
+                                }
+                                else
+                                {
+                                   @* <form method="post" asp-controller="Admin" asp-action="DeleteUserAccount">
+                                        <fieldset>
+                                            <input type="hidden" name="id" value="@user.Id" />
+                                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-ban"></i> </button>
+                                        </fieldset>
+                                    </form>*@
+
+                                    <form method="post" asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@user.Id">
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-user-times"></i></button>
+                                    </form>
+                                }
+                            }
+
+                        </div>
+                    </td>
+
+
+
+                </tr>
+            }
+        </table>
+    </div>
+    <br><br>
+    <div class="panel-footer d-flex justify-content-center">
+        <h5 class="box-title"><b>Създадените профили на потребителите са </b><span class="label label-primary">@Model.Count()</span></h5>
+    </div>
+</div>
+

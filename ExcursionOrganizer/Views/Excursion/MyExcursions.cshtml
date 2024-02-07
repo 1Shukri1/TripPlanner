@@ -1,0 +1,150 @@
+﻿@*Изглед за визуализиране на екскурзиите на потребителя, в които е записан*@
+
+@model ICollection<ExcursionOrganizer.Models.InputExcursionModel>
+
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="breadcrumb"><a href="#">Начало</a> / Моите резервации</span>
+                <h3>Моите резервации</h3>
+            </div>
+        </div>
+    </div>
+</div>
+@if (!User.IsInRole("Admin"))
+{
+    <div class="section properties">
+        <main class="mt-5">
+            <div class="container">
+                <div class="container">
+                    <div class="row properties-box">
+                        @if (Model.Any())
+                        {
+
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv">
+                                    <div class="item rounded shadow-lg p-3 mb-5 bg-white  ">
+                                        <a asp-action="Details" asp-route-id="@item.Id"><img src="@item.ImgURL" style="height: 250px;" alt=""></a>
+                                        @if (item.Status == "Периодична")
+                                        {
+                                            <span class="category" style="background-color:#ffa14a; color:white;">@item.Status</span>
+                                        }
+                                        else if (item.Status == "Активна")
+                                        {
+                                            <span class="category" style="background-color:#55d89b; color:white;">@item.Status</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="category" style="background-color:red; color:white;">@item.Status</span>
+                                        }
+                                        <h6>@item.Price лв.</h6>
+                                        <h4 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><a asp-action="Details" asp-route-id="@item.Id">@item.Destination</a></h4>
+                                        <ul>
+                                            <li>Транспорт: <span>@item.Transport</span></li>
+                                            <li>Начало: <span>@item.StartDate.ToShortDateString()</span></li>
+                                            <li>Край: <span>@item.EndDate.ToShortDateString()</span></li>
+                                            <li>
+                                                Места:
+                                                @if (item.MaxParticipants >= 1)
+                                                {
+                                                    <span style="color:green;">@item.MaxParticipants</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="color:red;"><i>НЯМА</i></span>
+                                                }
+                                            </li>
+                                        </ul>
+                                        <div class="main-button">
+                                            <a asp-action="Details" asp-route-id="@item.Id">Подробности</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="d-flex justify-content-center">
+                                <h3 style="color:red;">Все още не сте записани за някоя екскурзия!</h3>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+                @*
+            <div class="separator">
+            <hr class="line" />
+            <p class="section-header">От нашите екскурзии</p>
+            <hr class="line" />
+            </div>*@
+                <br>
+
+            </div>
+        </main>
+    </div>
+}
+else
+{
+    <br>
+    <br>
+    <br>
+    <br>
+    <h5 style="color:red;" class="d-flex justify-content-center"><i><b>В тази част се визуализират резервациите на потребителите в техните акаунт.</b></i></h5>
+    <br>
+    <h5 style="color:red;" class="d-flex justify-content-center"><b>Администраторът не може да си резервира място за екскурзия!</b></h5>
+}
+
+@*<style>
+    .separator {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .line {
+        width: 40%;
+        height: 1px;
+        background-color: #333;
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .section-header {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 10px;
+    }
+
+    @@media (max-width: 1400px) {
+        .line {
+            width: 35%;
+        }
+
+        .section-header {
+            font-size: 16px;
+        }
+    }
+
+    @@media (max-width: 990px) {
+        .line {
+            width: 25%;
+        }
+
+        .section-header {
+            font-size: 15px;
+        }
+    }
+
+    @@media (max-width: 465px) {
+        .line {
+            width: 15%;
+        }
+
+        .section-header {
+            font-size: 13px;
+        }
+    }
+</style>*@

@@ -1,0 +1,349 @@
+﻿@*Начална страница на уеб приложението (Landing page)*@
+
+@{
+    ViewData["Title"] = "Начало";
+}
+<br><br>
+<div class="main-banner">
+    <div class="owl-carousel owl-banner">
+        <div class="item item-1">
+            <img src="~/imgRepo/banner-01.jpg">
+            <div class="header-text">
+                <span class="category">Toronto, <em>Canada</em></span>
+                <h2>Hurry!<br>Get the Best Villa for you</h2>
+            </div>
+        </div>
+        <div class="item item-2">
+            <div class="header-text">
+                <span class="category">Melbourne, <em>Australia</em></span>
+                <h2>Be Quick!<br>Get the best villa in town</h2>
+            </div>
+        </div>
+        <div class="item item-3">
+            <div class="header-text">
+                <span class="category">Miami, <em>South Florida</em></span>
+                <h2>Act Now!<br>Get the highest level penthouse</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="featured section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="left-image">
+                    <img src="~/imgRepo/excursionImg.jpg" alt="">
+                    <a href="property-details.html"><img src="~/imgRepo/featured-icon.png" alt="" style="max-width: 60px; padding: 0px;"></a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="section-heading">
+                    <h6>| Нови пътешествия</h6>
+                    <h2>Изследвай смело, &amp;откривай света</h2>
+
+                </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Кои сме ние?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Ние сме фирма <strong>Trip Planner</strong>. Открийте света с нас! Нашата фирма за екскурзии ви предоставя невероятни възможности за пътешествия и приключения. Съчетаваме комфорт, качество и персонализирано обслужване, за да направим вашата екскурзия незабравима. Доверете се на нас и преживейте света с нови очи!"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Нашият ангажимент?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Нашето ангажимент е да предоставим на клиентите ни не само пътешествия, а истински приказки. Поемаме ангажимента за индивидуално внимание, висок стандарт на обслужване и безопасност на всяко пътуване. С нас, всяко приключение е уникален опит, който отразява нашия ангажимент към качество и невероятни спомени.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Защо да изберете нас?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Изберете нас за екскурзии с несравнимо изживяване. Уникални маршрути, персонален стил и високо качество на обслужване. Пътешествайте с нас и се потопете в истинско приключение!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="info-table">
+                    <ul>
+                        <li>
+                            <img src="~/imgRepo/info-icon-01.png" alt="" style="max-width: 52px;">
+                            <h4>Пътешествие<br><span>250+ Дестинации</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-02.png" alt="" style="max-width: 52px;">
+                            <h4>Екскурзия<br><span>Готов за Път</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-03.png" alt="" style="max-width: 52px;">
+                            <h4>Резервация<br><span>Онлайн резервация</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-04.png" alt="" style="max-width: 52px;">
+                            <h4>Безопасност<br><span>24/7 Под Контрол</span></h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="video section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="section-heading text-center">
+                    <h6>| Екскурзия</h6>
+                    <h2>Лазурният бряг на Франция</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="video-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="video-frame">
+                    <img src="~/imgRepo/video-frame-excursion.jpg" alt="">
+                    <a href="https://youtu.be/dTJ8yWZa3QA" target="_blank"><i class="fa fa-play"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fun-facts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <h2 class="timer count-title count-number" >+99</h2>
+                                <p class="count-text ">Пътешествия<br>и дестинации</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <h2 class="timer count-title count-number" >+30</h2>
+                                <p class="count-text ">Екипни<br>турнири</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <h2 class="timer count-title count-number"> +99</h2>
+                                <p class="count-text ">Нови<br>приключения</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section best-deal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="section-heading">
+                    <h6>| Нови приключения</h6>
+                    <h2>Открийте Нови Приключения!</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="tabs-content">
+                    <div class="row">
+                        <div class="nav-wrapper ">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="appartment-tab" data-bs-toggle="tab" data-bs-target="#appartment" type="button" role="tab" aria-controls="appartment" aria-selected="true">Нощувки</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="villa-tab" data-bs-toggle="tab" data-bs-target="#villa" type="button" role="tab" aria-controls="villa" aria-selected="false">Забележителности</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="penthouse-tab" data-bs-toggle="tab" data-bs-target="#penthouse" type="button" role="tab" aria-controls="penthouse" aria-selected="false">Храна</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="appartment" role="tabpanel" aria-labelledby="appartment-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Пространство <span>100 m2</span></li>
+                                                <li>Етажи <span>1-10</span></li>
+                                                <li>Стаи <span>1</span></li>
+                                                <li>Вечеря <span>Да</span></li>
+                                                <li>Тоалетна, баня <span>Да</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-01.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>
+                                            Отпочнете вълнуващото си приключение с комфортни нощувки в премиум хотели и уникални места за настаняване. 
+                                            <br><br>Разнообразието от опции ще ви позволи да се насладите на неповторим комфорт и автентична атмосфера, които ще направят вашия престой още по-незабравим.
+                                        </p>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="villa" role="tabpanel" aria-labelledby="villa-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Красота <span>100%</span></li>
+                                                <li>Разнообразие <span>100%</span></li>
+                                                <li>Спокойствие <span>100%</span></li>
+                                                <li>Нови приятелства <span>100%</span></li>
+                                                <li>Нови забележителности <span>100%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-zabelejitelnosti.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>Обогатете своето пътешествие с посещение на най-значимите забележителности в дестинацията. <br><br> От исторически паметници и културни атракции до природни чудеса, всяка забележителност е уникална и предлага вълнуваща перспектива върху богатството на света. Разкрийте тайните на всяко място и създайте неповторими спомени. </p>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="penthouse" role="tabpanel" aria-labelledby="penthouse-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Нови вкусове <span>100%</span></li>
+                                                <li>Различни храни <span>100%</span></li>
+                                                <li>Качествени храни <span>100%</span></li>
+                                                <li>Леки храни<span>100%</span></li>
+                                                <li>Специалитети<span>100%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-hrana.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>Закуски, обеди и вечери са повече от хранене – те са път към културния дух на дадено място. <br><br> Вашето екскурзионно пътешествие е още по-значимо, когато се наслаждавате на богатството на местната гастрономия. Разнообразието от вкусове, приготвени с любов и страст от майсторски готвачи, ви предлага уникална възможност да се потопите в културата на местната общност.</p>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="contact section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="section-heading text-center">
+                    <h6>| Контакти</h6>
+                    <h2>СВЪРЖЕТЕ СЕ С НАС</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="map">
+                    <img src="~/imgRepo/contacts.webp" width="100%"; height="500px;">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="item phone">
+                            <img src="~/imgRepo/phone-icon.png" alt="" style="max-width: 52px;">
+                            <h6>111-111-1111<br><span>Телефон</span></h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="item email">
+                            <img src="~/imgRepo/email-icon.png" alt="" style="max-width: 52px;">
+                            <h6>trip@planner.com<br><span>И-мейл </span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <form id="contact-form" action="" method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="name">Име</label>
+                                <input type="name" name="name" id="name" placeholder="Вашето име..." autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="email">И-мейл</label>
+                                <input type="text" name="email" id="email" placeholder="Вашият и-мейл..." required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="subject">Заглавие</label>
+                                <input type="subject" name="subject" id="subject" placeholder="Заглавие..." autocomplete="on">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="message">Съобщение</label>
+                                <textarea name="message" id="message" placeholder="Вашето съобщение"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="orange-button">Изпращане</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,339 @@
+﻿@*Изглед за визуализиране на детайлите(подробностите) за екскурзията*@
+
+@model ExcursionOrganizer.Data.Models.CombinedModel // извикване на комбинирания модел, който включва InputExcursionModel и InputExcursionUserModel
+@using ExcursionOrganizer.Data.Models;
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Principal;
+@using System.Security.Claims;
+
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="breadcrumb"><a href="#">Начало</a>  /  Подробности</span>
+                <h3>Подробности - @Model.ExcursionModel.Destination</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-property section">
+    <div class="container">
+        <div class="row">
+            @if (User.IsInRole("Admin")) // проверка - дали потребителят е администратор
+            {
+                <div class="d-flex justify-content-center">
+
+                    <span>
+                        <a asp-action="Edit" asp-route-id="@Model.ExcursionModel.Id">
+                            <button type="button" class="btn btn-success" style="font-size:18px;"> Редактиране <i class="far fa-edit"></i> </button>
+                        </a>
+                    </span>
+
+                    <form id="deleteForm" method="post" asp-action="Delete" asp-route-id="@Model.ExcursionModel.Id" style="display:none;">
+                        <button type="submit" class="btn btn-danger btn-sm" style="font-size: 18px;">Изтриване</button>
+                    </form>
+                    <span style="padding:2px;">
+                        <button type="button" class="btn btn-danger btn-sm" style="font-size:18px; margin-left:15px; margin-right:15px;" onclick="confirmDelete()">Изтриване <i class="fas fa-trash"></i></button>
+                    </span>
+
+                    <span>
+                        <a asp-action="RegisteredUsers" asp-controller="Excursion" asp-route-excursionId="@Model.ExcursionModel.Id">
+                            <button type="button" class="btn btn-warning" style="font-size:18px; color:white;"> Записани потребители </button>
+                        </a>
+                    </span>
+
+                </div>
+            }
+            <br><br><br>
+            <div class="col-lg-8">
+                <div class="main-image">
+                    <img src="@Model.ExcursionModel.ImgURL" alt="">
+                </div>
+                <div class="main-content">
+                    <div>
+                        <span style=" float:left; margin-right: 15px;" class="category">фирма: Trip Planner </span>
+                        @if (Model.ExcursionModel.Status == "Периодична")
+                        {
+                            <span class="category" style="background-color:#ffa14a; color:white;">Състояние: @Model.ExcursionModel.Status</span>
+                        }
+                        else if (Model.ExcursionModel.Status == "Активна")
+                        {
+                            <span class="category" style="background-color:#55d89b; color:white;">Състояние: @Model.ExcursionModel.Status</span>
+
+                        }
+                        else
+                        {
+                            <span class="category" style="background-color:red; color:white;">Състояние: @Model.ExcursionModel.Status</span>
+                        }
+                    </div>
+
+                    <br>
+                    <h4>@Model.ExcursionModel.Destination</h4>
+                    <p>
+                        <div class="d-flex justify-content-around">
+                            <h6 style="float:left; font-weight:initial;"> Дата на заминаване: <span style=" font-size:18px; color: green;"> <b> @Model.ExcursionModel.StartDate.ToShortDateString()</b></span></h6>
+                            <h6 style="float:left; font-weight:initial;">  Дата на връщане: <span style=" font-size:18px; color: darkorange;"> <b>@Model.ExcursionModel.EndDate.ToShortDateString()</b></span></h6>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-around">
+                            <h6 font-weight:initial;"> Места: <span style=" font-size:18px; color: red;"> <b> @Model.ExcursionModel.MaxParticipants</b></span></h6>
+                        </div>
+                        <br>
+                        <h5>Опсиание: </h5>
+                        <br>
+                        @Model.ExcursionModel.Description
+                    </p>
+                </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Кои сме ние?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Ние сме фирма <strong>Trip Planner</strong>. Открийте света с нас! Нашата фирма за екскурзии ви предоставя невероятни възможности за пътешествия и приключения. Съчетаваме комфорт, качество и персонализирано обслужване, за да направим вашата екскурзия незабравима. Доверете се на нас и преживейте света с нови очи!"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Нашият ангажимент?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Нашето ангажимент е да предоставим на клиентите ни не само пътешествия, а истински приказки. Поемаме ангажимента за индивидуално внимание, висок стандарт на обслужване и безопасност на всяко пътуване. С нас, всяко приключение е уникален опит, който отразява нашия ангажимент към качество и невероятни спомени.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Защо да изберете нас?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Изберете нас за екскурзии с несравнимо изживяване. Уникални маршрути, персонален стил и високо качество на обслужване. Пътешествайте с нас и се потопете в истинско приключение!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-table">
+                    <ul>
+                        <li>
+                            <img src="~/imgRepo/info-icon-01.png" alt="" style="max-width: 52px;">
+                            <h4>@Model.ExcursionModel.StartDate.ToShortDateString()<br><span>Начало</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-02.png" alt="" style="max-width: 52px;">
+                            <h4>@Model.ExcursionModel.EndDate.ToShortDateString()<br><span>Край</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-03.png" alt="" style="max-width: 52px;">
+                            <h4>@Model.ExcursionModel.Price лв.<br><span>ЦЕНА (общо)</span></h4>
+                        </li>
+                        <li>
+                            <img src="~/imgRepo/info-icon-04.png" alt="" style="max-width: 52px;">
+                            <h4>@Model.ExcursionModel.Transport<br><span>Транспорт</span></h4>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center">
+                        @if (Model.ExcursionModel.MaxParticipants < 1)
+                        {
+                            <button type="submit" class="btn btn-danger disabled" style="font-size:18px;">Няма места</button>
+                        }
+                        else
+                        {
+                            @if (User.IsInRole("Admin") || Model.ExcursionModel.Status == "Неактивна")
+                            {
+                                <form method="post" asp-action="RegisterForExcursion" asp-controller="Excursion" asp-route-excursionId="@Model.ExcursionModel.Id">
+                                    <button type="submit" class="btn btn-danger disabled" style="font-size:18px;"> Запиши се  </button>
+                                </form>
+                                @*<p style="color:red; font-size:18px;"><i>Администраторът не може да се запише за екскурзията</i></p>*@
+                            }
+                            else
+                            {
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Резервация</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" asp-route-excursionId="@Model.ExcursionModel.Id" asp-action="RegisterForExcursion" enctype="multipart/form-data">
+                                                    <div class="mb-3">
+                                                        <label>Име <span style="color:red; font-size:20px;">*</span></label>
+                                                        <input required name="Name" class="form-control" placeholder="Вашето име" />
+                                                        <span class="text-danger"></span>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label>Телефонен номер: <span style="color:red; font-size:20px;">*</span></label>
+                                                        <input required name="Phone" class="form-control" placeholder="Вашият телефонен номер" />
+                                                        <span class="text-danger"></span>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-success" style="font-size:18px;"> Запиши се </button>
+                                                </form>
+
+                                                <div clas="d-flex justify-content-center">
+                                                    <p style="color:red;"><i>ВНИМАНИЕ! Можете да резервирате само 1 място. Всеки един потребител може да резервира място само за себе си!</i></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                //проверка дали имената и телефонният номер на потребителя, свързан с конкретната екскурзия, съществуват и не са празни
+                                @if (!string.IsNullOrEmpty(Model.ExcursionUserModel?.Name) && !string.IsNullOrEmpty(Model.ExcursionUserModel?.Phone))
+                                {
+                                    
+                                    <form id="unsubscribeForm" method="post" asp-action="UnsubscribeFromExcursion" asp-controller="Excursion" asp-route-excursionId="@Model.ExcursionModel.Id">
+                                        <button type="button" class="btn btn-danger" style="font-size: 18px;" onclick="confirmUnsubscribe()"> Отпиши се </button>
+                                    </form>
+
+                                }
+                                else
+                                {
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="btn btn-success"  asp-area="Identity" asp-page="/Account/Login" style="font-size:18px;"> Запиши се  </a>
+
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@@getbootstrap" style="font-size:18px;"> Запиши се  </button>
+                                    }
+                                }
+                            }
+                        }
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section best-deal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="section-heading">
+                    <h6>| Нови приключения</h6>
+                    <h2>Открийте Нови Приключения!</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="tabs-content">
+                    <div class="row">
+                        <div class="nav-wrapper ">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="appartment-tab" data-bs-toggle="tab" data-bs-target="#appartment" type="button" role="tab" aria-controls="appartment" aria-selected="true">Нощувки</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="villa-tab" data-bs-toggle="tab" data-bs-target="#villa" type="button" role="tab" aria-controls="villa" aria-selected="false">Забележителности</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="penthouse-tab" data-bs-toggle="tab" data-bs-target="#penthouse" type="button" role="tab" aria-controls="penthouse" aria-selected="false">Храна</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="appartment" role="tabpanel" aria-labelledby="appartment-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Пространство <span>100 m2</span></li>
+                                                <li>Етажи <span>1-10</span></li>
+                                                <li>Стаи <span>1</span></li>
+                                                <li>Вечеря <span>Да</span></li>
+                                                <li>Тоалетна, баня <span>Да</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-01.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>
+                                            Отпочнете вълнуващото си приключение с комфортни нощувки в премиум хотели и уникални места за настаняване.
+                                            <br><br>Разнообразието от опции ще ви позволи да се насладите на неповторим комфорт и автентична атмосфера, които ще направят вашия престой още по-незабравим.
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="villa" role="tabpanel" aria-labelledby="villa-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Красота <span>100%</span></li>
+                                                <li>Разнообразие <span>100%</span></li>
+                                                <li>Спокойствие <span>100%</span></li>
+                                                <li>Нови приятелства <span>100%</span></li>
+                                                <li>Нови забележителности <span>100%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-zabelejitelnosti.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>Обогатете своето пътешествие с посещение на най-значимите забележителности в дестинацията. <br><br> От исторически паметници и културни атракции до природни чудеса, всяка забележителност е уникална и предлага вълнуваща перспектива върху богатството на света. Разкрийте тайните на всяко място и създайте неповторими спомени. </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="penthouse" role="tabpanel" aria-labelledby="penthouse-tab">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="info-table">
+                                            <ul>
+                                                <li>Нови вкусове <span>100%</span></li>
+                                                <li>Различни храни <span>100%</span></li>
+                                                <li>Качествени храни <span>100%</span></li>
+                                                <li>Леки храни<span>100%</span></li>
+                                                <li>Специалитети<span>100%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="~/imgRepo/deal-hrana.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h4>Допълнителна информация</h4>
+                                        <p>Закуски, обеди и вечери са повече от хранене – те са път към културния дух на дадено място. <br><br> Вашето екскурзионно пътешествие е още по-значимо, когато се наслаждавате на богатството на местната гастрономия. Разнообразието от вкусове, приготвени с любов и страст от майсторски готвачи, ви предлага уникална възможност да се потопите в културата на местната общност.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

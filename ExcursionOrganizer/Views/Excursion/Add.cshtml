@@ -1,0 +1,167 @@
+﻿@*Изглед за добавяне на екскурзия*@
+
+@model ExcursionOrganizer.Models.InputExcursionModel
+
+<br>
+<br>
+<br>
+<br>
+
+<form style="display:grid; place-items:center;" method="post" enctype="multipart/form-data" onsubmit="return validateDates()">
+
+    <div class="form-group">
+        <label asp-for="Destination" class="control-label">Дестинация <span style="color:red; font-size:20px;">*</span></label>
+        <input required asp-for="Destination" maxlength="25" id="excInfo" class="form-control" placeholder="Например: Франция, Реимс / България, София " />
+        <span asp-validation-for="Destination" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Transport" class="control-label">Изберете транспорт <span style="color:red; font-size:20px;">*</span></label>
+        <select class="form-control" style="width: 600px; height:55px;" asp-for="Transport" name="Transport">
+            <option value="Автобус">Автобус</option>
+            <option value="Влак">Влак</option>
+            <option value="Самолет">Самолет</option>
+            <option value="Кораб/Круиз">Кораб/Круиз</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label">Начална дата на екскурзията<span style="color:red; font-size:20px;">*</span> </label>
+      
+        <input required type="date" asp-for="StartDate" value="StartDate" style="width: 600px;height: 55px;margin-bottom: 20px; id="excInfo" class="form-control StartDate" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label">Крайна дата на екскурзията<span style="color:red; font-size:20px;">*</span> </label>
+        <input required type="date" asp-for="EndDate" value="EndDate" style="width: 600px;height: 55px;margin-bottom: 20px; id="excInfo" class="form-control EndDate" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <script>
+        function validateDates() {
+            var startDateInput = document.querySelector('.StartDate'); // извличане на даннитe от инпут полето по id
+            var endDateInput = document.querySelector('.EndDate'); // извличане на даннитe от инпут полето по id
+
+            var startDate = new Date(startDateInput.value); // преобразуване в дата
+            var endDate = new Date(endDateInput.value); // преобразуване в дата
+
+            var today = new Date(); // текуща (днескашна) дата
+
+            // Проверка за StartDate, дали е по-стара от днескашната дата
+            if (startDate < today) {
+                alert('Началната дата не може да бъде стара!');
+                startDateInput.value = ''; // Изчистване на стойността ако е стара
+                return false;
+            }
+
+            // Проверка за EndDate, дали е по - стара от началната дата
+            if (endDate < startDate) {
+                alert('Крайната дата не може да бъде по стара от началната');
+                endDateInput.value = ''; // Изчистване на стойността ако е стара
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <div class="form-group">
+        <label asp-for="MaxParticipants" class="control-label">Максимален брой участници <span style="color:red; font-size:20px;">*</span></label>
+        <input asp-for="MaxParticipants" id="excursionPrice" class="form-control" />
+        <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="control-label">Цена <span style="color:red; font-size:20px;">*</span></label>
+        <input asp-for="Price" id="excursionPrice" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Описание <span style="color:red; font-size:20px;">*</span></label>
+        <textarea required asp-for="Description" id="excursionDescription" class="form-control" placeholder="Заповядайте на неповторимо приключение с нашата ексклузивна екскурзия, предлагаща вълнуващо пътешествие към най-изтънчените и красиви дестинации... "></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label">Състояние <span style="color:red; font-size:20px;">*</span></label>
+        <select class="form-control" style="width: 600px; height:55px;" asp-for="Status" name="Status">
+            <option value="Активна">Активна</option>
+            <option value="Неактивна">Неактивна</option>
+            <option value="Периодична">Периодична</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div style="text-align:center;">
+            <label asp-for="Image" class="control-label">Снимка <span style="color:red; font-size:20px;">* </span></label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <label asp-for="Image" class="control-label" style="display:none;"></label>
+            <input required asp-for="Image" style="display:none;" type="file" id="file" />
+
+            <label id="file2" for="file" style="display:grid; place-items:center; cursor:pointer;" class="d-flex justify-content-center">
+                <i id="imgLogo2" class="bi bi-check" style="display:none;color:green;"></i>
+                <i class="bi bi-folder-symlink-fill" style="font-size:40px;"></i>
+            </label>
+            <span asp-validation-for="Image" class=""></span>
+        </div>
+    </div>
+
+    <br>
+
+    <input type="submit" class="btn btn-success" value="Добави екскурзия" />
+</form>
+
+<style>
+    #file + label {
+        font-size: 2em;
+        font-weight: 700;
+        color: black;
+        background-color: #ebebeb;
+        width: 600px;
+        height: 250px;
+        border-radius: 10px;
+        border-style: dashed;
+        border-color: #b5b5b5;
+        border-width: 2px;
+    }
+
+        #file:focus + label,
+        #file + label:hover {
+            background-color: #dbdbdb;
+        }
+
+    #excInfo, #excursionPrice, #jobCategory, #jobImg, .inputs {
+        width: 600px;
+        height: 55px;
+        margin-bottom: 20px;
+    }
+
+    #excursionDescription {
+        margin-bottom: 20px;
+        width: 600px;
+        height: 300px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        var fileInput = document.getElementById('file');// ИЗвличане на данните от файловия инпут
+
+        fileInput.addEventListener('change', function () {
+            
+            var imgLogo2 = document.getElementById('imgLogo2');
+
+            // Проверка дали файл е избран
+            if (fileInput.value !== "") {
+                // Скриване на първоначалната икона
+                imgLogo2.style.display = 'none';
+                // Показване на втората икона
+                imgLogo2.style.display = 'block';
+                document.getElementById("file2").style.backgroundColor = "#e2efe2"; // променяане на задния фон на инпута
+            }
+        });
+    });
+</script>
